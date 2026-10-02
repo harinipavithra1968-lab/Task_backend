@@ -2425,25 +2425,14 @@ p {
   }
 
   .login-image {
-    width: 100%;
     height: 240px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   .login-image img {
-    width: 90%;
-    height: 100%;
-    object-fit: contain;
-    object-position: 35% center;
-    display: block;
-  }
-
-  .auth-card {
     width: 100%;
-    padding: 35px 25px;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 }
 
