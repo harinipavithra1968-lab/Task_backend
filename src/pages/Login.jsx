@@ -45,7 +45,9 @@ export default function Login() {
       setBusy(false);
     }
   };
-
+  const handleGoogleLogin = () => {
+    window.location.href = "https://task-frontend-gyqw.onrender.com/api/auth/google";
+  };
   const field = (name, label, type = 'text', auto) => (
     <label className="field">
       <span>{label}</span>
@@ -74,6 +76,10 @@ export default function Login() {
         </form>
         <button className="link" onClick={() => { setMode(isLogin ? 'register' : 'login'); setErrors({}); setServerError(''); }}>
           {isLogin ? 'New here? Create an account' : 'Already have an account? Sign in'}
+        </button>
+        <button onClick={handleGoogleLogin}>
+          <span className="google-icon">G</span>
+          <span>Sign in with Google</span>
         </button>
       </section>
     </main>

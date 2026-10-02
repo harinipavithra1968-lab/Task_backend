@@ -1949,7 +1949,33 @@ p {
 /* ================================
    TASK STATUS SELECT
 ================================ */
+.google-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px 16px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background: #fff;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
 
+.google-btn:hover {
+  background: #f7f7f7;
+  border-color: #bbb;
+}
+
+.google-icon {
+  font-size: 18px;
+  font-weight: 700;
+}
 .task-actions select {
   width: 155px;
   height: 48px;
