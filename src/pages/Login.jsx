@@ -77,9 +77,13 @@ export default function Login() {
         <button className="link" onClick={() => { setMode(isLogin ? 'register' : 'login'); setErrors({}); setServerError(''); }}>
           {isLogin ? 'New here? Create an account' : 'Already have an account? Sign in'}
         </button>
-        <button onClick={handleGoogleLogin}>
-          <span className="google-icon">G</span>
-          <span>Sign in with Google</span>
+        <button
+          type="button"
+          className="google-btn"
+          onClick={handleGoogleLogin}
+        >
+          <span>G</span>
+          Sign in with Google
         </button>
       </section>
     </main>
