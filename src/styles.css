@@ -2436,7 +2436,7 @@ p {
   .login-image img {
     width: 90%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: 35% center;
     display: block;
   }
