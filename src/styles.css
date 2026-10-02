@@ -2457,53 +2457,25 @@ p {
 }
 
 
-/* =========================
-   SMALL MOBILE
-========================= */
-@media (max-width: 400px) {
-
-  .login-image {
-    height: 180px;
-    min-height: 180px;
-  }
-
-  .login-image img {
-    object-fit: cover;
-    object-position: center;
-  }
-
-  .auth-card {
-    padding: 25px 18px;
-  }
-}
-/* Tablet */
 @media (max-width: 900px) {
+  .auth-container {
+    grid-template-columns: 1fr;
+  }
+
   .login-image {
-    height: 300px;
+    width: 100%;
+    height: 40vw;
+    min-height: 180px;
+    max-height: 350px;
   }
 
   .login-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
   }
 }
 
-@media (max-width: 600px) {
-  .login-image {
-    width: 100%;
-    height: 220px;
-  }
-
-  .login-image img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-    object-position: center;
-  }
-}
 /* =========================================================
    RESPONSIVE — TABLET
    ========================================================= */
