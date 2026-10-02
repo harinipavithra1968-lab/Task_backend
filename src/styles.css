@@ -1919,6 +1919,8 @@ p {
   cursor: pointer;
 
   text-decoration: underline;
+
+  align-items: center;
 }
 
 /* ================================
