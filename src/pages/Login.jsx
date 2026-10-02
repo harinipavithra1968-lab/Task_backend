@@ -59,6 +59,12 @@ export default function Login() {
   return (
     <main className="auth">
       <section className="auth-card">
+        <div className="login-image">
+          <img
+            src="/login.png"
+            alt="Task management illustration"
+          />
+        </div>
         <h1>TaskDesk</h1>
         <p className="muted">{isLogin ? 'Sign in to see your tasks.' : 'Create an account to start planning.'}</p>
         {serverError && <div className="notice error" role="alert">{serverError}</div>}
