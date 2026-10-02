@@ -1,6 +1,5 @@
 const BASE = import.meta.env.VITE_API_URL || "/api";
 
-// Reusable API helper
 export async function api(path, { method = "GET", body } = {}) {
   const token = localStorage.getItem("token");
 
@@ -16,7 +15,7 @@ export async function api(path, { method = "GET", body } = {}) {
   const data = await res.json().catch(() => ({}));
 
   if (!res.ok) {
-    throw new Error(data.message || "Something went wrong");
+    throw new Error(data.message || `Request failed: ${res.status}`);
   }
 
   return data;
