@@ -1920,7 +1920,11 @@ p {
 
   text-decoration: underline;
 
-  align-items: center;
+  
+}
+.btn.primary.block {
+  display: block;
+  margin: 0 auto;
 }
 
 /* ================================
