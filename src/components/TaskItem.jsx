@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
-import { STATUSES } from './TaskForm';
-
 function TaskImage({ src, alt }) {
   const [imageSrc, setImageSrc] = useState('');
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
     let objectUrl;
@@ -11,22 +9,45 @@ function TaskImage({ src, alt }) {
       try {
         const token = localStorage.getItem('token');
 
+        if (!token) {
+          console.error('No login token found');
+          return;
+        }
+
+        console.log('Loading task image:', src);
+
         const response = await fetch(src, {
+          method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
+        console.log('Image response status:', response.status);
+
         if (!response.ok) {
-          throw new Error('Failed to load image');
+          const errorText = await response.text();
+          console.error(
+            'Image server error:',
+            response.status,
+            errorText
+          );
+          throw new Error(
+            `Image request failed: ${response.status}`
+          );
         }
 
         const blob = await response.blob();
 
         objectUrl = URL.createObjectURL(blob);
         setImageSrc(objectUrl);
+        setImageError(false);
       } catch (error) {
-        console.error('Task image loading failed:', error);
+        console.error(
+          'Task image loading failed:',
+          error
+        );
+        setImageError(true);
       }
     };
 
@@ -39,6 +60,14 @@ function TaskImage({ src, alt }) {
     };
   }, [src]);
 
+  if (imageError) {
+    return (
+      <div className="task-image-error">
+        Image could not be loaded
+      </div>
+    );
+  }
+
   if (!imageSrc) return null;
 
   return (
@@ -47,73 +76,5 @@ function TaskImage({ src, alt }) {
       alt={alt}
       className="task-image"
     />
-  );
-}
-
-export default function TaskItem({
-  task,
-  showDate,
-  onEdit,
-  onDelete,
-  onStatus,
-}) {
-  return (
-    <li className={`task ${task.status}`}>
-      <div className="task-body">
-
-        {task.imageUrl && (
-          <TaskImage
-            src={task.imageUrl}
-            alt={task.title}
-          />
-        )}
-
-        <h3>{task.title}</h3>
-
-        {task.description && (
-          <p>{task.description}</p>
-        )}
-
-        {showDate && (
-          <small className="muted">
-            {task.date}
-          </small>
-        )}
-
-      </div>
-
-      <div className="task-actions">
-        <select
-          value={task.status}
-          onChange={(e) =>
-            onStatus(task, e.target.value)
-          }
-          aria-label="Task status"
-        >
-          {STATUSES.map((s) => (
-            <option
-              key={s.value}
-              value={s.value}
-            >
-              {s.label}
-            </option>
-          ))}
-        </select>
-
-        <button
-          className="btn small"
-          onClick={() => onEdit(task)}
-        >
-          Edit
-        </button>
-
-        <button
-          className="btn small danger"
-          onClick={() => onDelete(task)}
-        >
-          Delete
-        </button>
-      </div>
-    </li>
   );
 }
