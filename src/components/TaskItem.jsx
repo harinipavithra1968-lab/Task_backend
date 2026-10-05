@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { STATUSES } from './TaskForm';
 
@@ -30,7 +31,9 @@ function TaskImage({ src, alt }) {
       }
     };
 
-    loadImage();
+    if (src) {
+      loadImage();
+    }
 
     return () => {
       if (objectUrl) {
@@ -59,8 +62,10 @@ export default function TaskItem({
 }) {
   return (
     <li className={`task ${task.status}`}>
+
       <div className="task-body">
 
+        {/* Small task image */}
         {task.imageUrl && (
           <TaskImage
             src={task.imageUrl}
@@ -68,21 +73,26 @@ export default function TaskItem({
           />
         )}
 
-        <h3>{task.title}</h3>
+        <div className="task-content">
 
-        {task.description && (
-          <p>{task.description}</p>
-        )}
+          <h3>{task.title}</h3>
 
-        {showDate && (
-          <small className="muted">
-            {task.date}
-          </small>
-        )}
+          {task.description && (
+            <p>{task.description}</p>
+          )}
+
+          {showDate && (
+            <small className="muted">
+              {task.date}
+            </small>
+          )}
+
+        </div>
 
       </div>
 
       <div className="task-actions">
+
         <select
           value={task.status}
           onChange={(e) =>
@@ -113,7 +123,10 @@ export default function TaskItem({
         >
           Delete
         </button>
+
       </div>
+
     </li>
   );
 }
+

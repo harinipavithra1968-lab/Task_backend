@@ -413,6 +413,32 @@
 
   box-shadow: 0 8px 18px rgba(88, 101, 242, 0.22);
 }
+.task-body {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.task-image {
+  width: 70px;
+  height: 70px;
+  min-width: 70px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+.task-content {
+  flex: 1;
+  min-width: 0;
+}
+.task-image {
+  width: 55px;
+  height: 55px;
+  min-width: 55px;
+  object-fit: cover;
+  border-radius: 8px;
+}
 
 .task-brand h1 {
   margin: 0;
