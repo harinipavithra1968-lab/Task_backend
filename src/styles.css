@@ -1823,555 +1823,54 @@ p {
    LOGIN / AUTH
    ========================================================= */
 
-/* ================================
-   LOGIN PAGE
-================================ */
-
 .auth {
   min-height: 100vh;
-  width: 100%;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
 
-  padding: 30px;
+  place-items: center;
+
+  padding: 20px;
 
   background:
-    radial-gradient(
-      circle at 10% 20%,
-      rgba(88, 101, 242, 0.10),
-      transparent 35%
-    ),
-    radial-gradient(
-      circle at 90% 80%,
-      rgba(120, 90, 240, 0.10),
-      transparent 35%
-    ),
-    #f6f8fc;
+    radial-gradient(circle at 20% 20%,
+      rgba(88, 101, 242, .12),
+      transparent 30%),
+    radial-gradient(circle at 80% 80%,
+      rgba(118, 87, 232, .10),
+      transparent 30%),
+    #f5f7fc;
 }
-
-
-/* ================================
-   MAIN LOGIN CARD
-================================ */
 
 .auth-card {
-  position: relative;
+  width: min(420px, 100%);
 
-  width: min(1100px, 100%);
-  min-height: 650px;
+  padding: 35px;
 
-  padding: 55px 65px 55px 56%;
+  border: 1px solid #e5e9f3;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  border-radius: 24px;
 
-  background: #ffffff;
+  background: white;
 
-  border-radius: 28px;
-
-  box-shadow:
-    0 25px 70px rgba(35, 45, 85, 0.14);
-
-  overflow: hidden;
+  box-shadow: var(--shadow-lg);
 }
 
+.auth-card h1 {
+  margin-bottom: 5px;
 
-/* ================================
-   LEFT IMAGE
-================================ */
+  color: var(--primary);
 
-.login-image {
-  position: absolute;
-
-  left: 0;
-  top: 0;
-  bottom: 0;
-
-  width: 50%;
-
-  overflow: hidden;
-
-  background: #f8f7ff;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.login-image img {
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-  object-position: left center;
-
-  display: block;
-}
-
-
-/* ================================
-   LOGIN CONTENT
-   Everything except image
-================================ */
-
-.auth-card > h1,
-.auth-card > .muted,
-.auth-card > .notice,
-.auth-card > form,
-.auth-card > .link,
-.auth-card > .google-btn {
-  width: 100%;
-}
-
-
-/* ================================
-   TASKDESK TITLE
-================================ */
-
-.auth-card > h1 {
-  margin: 0 0 7px;
-
-  color: #5865f2;
-
-  font-size: 34px;
+  font-size: 28px;
   font-weight: 900;
-
-  letter-spacing: -1px;
 }
 
-
-/* ================================
-   SUBTITLE
-================================ */
-
-.auth-card > .muted {
-  margin: 0 0 30px;
-
-  color: #7c8499;
+.auth-card .muted {
+  margin-bottom: 25px;
 
   font-size: 13px;
-  line-height: 1.5;
 }
 
-
-/* ================================
-   FORM
-================================ */
-
-.auth-card form {
-  margin: 0;
-}
-
-
-/* ================================
-   INPUT FIELDS
-================================ */
-
-.auth-card .field {
-  display: block;
-
-  margin-bottom: 19px;
-}
-
-.auth-card .field > span {
-  display: block;
-
-  margin-bottom: 8px;
-
-  color: #26345f;
-
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.auth-card .field input {
-  width: 100%;
-  height: 48px;
-
-  padding: 0 14px;
-
-  border: 1px solid #dfe4ef;
-  border-radius: 12px;
-
-  background: #fafbff;
-
-  color: #202b4d;
-
-  font-size: 13px;
-
-  outline: none;
-
-  box-sizing: border-box;
-
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease;
-}
-
-.auth-card .field input:focus {
-  border-color: #5865f2;
-
-  background: #ffffff;
-
-  box-shadow:
-    0 0 0 4px rgba(88, 101, 242, 0.09);
-}
-
-
-/* ================================
-   ERROR
-================================ */
-
-.auth-card .error-text {
-  display: block;
-
-  margin-top: 5px;
-
-  color: #df4855;
-
-  font-size: 11px;
-}
-
-
-/* ================================
-   SIGN IN BUTTON
-================================ */
-
-.auth-card form .btn {
-  width: 100%;
-  height: 48px;
-
-  margin-top: 4px;
-
-  border: none;
-  border-radius: 12px;
-
-  background: #5865f2;
-
-  color: #ffffff;
-
-  font-size: 13px;
-  font-weight: 800;
-
-  cursor: pointer;
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease;
-}
-
-.auth-card form .btn:hover {
-  background: #4d5be8;
-
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 10px 24px rgba(88, 101, 242, 0.25);
-}
-
-.auth-card form .btn:disabled {
-  opacity: 0.65;
-
-  cursor: not-allowed;
-
-  transform: none;
-}
-
-
-/* ================================
-   CREATE ACCOUNT LINK
-================================ */
-
-.auth-card > .link {
-  margin: 17px 0;
-
-  padding: 0;
-
-  border: none;
-
-  background: transparent;
-
-  color: #5865f2;
-
-  font-size: 13px;
-
-  text-align: center;
-
-  cursor: pointer;
-}
-
-.auth-card > .link:hover {
-  text-decoration: underline;
-}
-
-
-/* ================================
-   GOOGLE BUTTON
-================================ */
-
-.auth-card > .google-btn {
-  height: 48px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 10px;
-
-  border: 1px solid #dfe3eb;
-  border-radius: 12px;
-
-  background: #ffffff;
-
-  color: #222222;
-
-  font-size: 13px;
-  font-weight: 650;
-
-  cursor: pointer;
-
-  transition:
-    background 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.auth-card > .google-btn:hover {
-  background: #f8f9fc;
-
-  border-color: #cbd2df;
-
-  box-shadow:
-    0 5px 15px rgba(35, 45, 85, 0.08);
-}
-
-.auth-card > .google-btn span {
-  font-size: 18px;
-  font-weight: 800;
-
-  color: #4285f4;
-}
-
-
-/* ================================
-   SERVER ERROR
-================================ */
-
-.auth-card .notice {
-  margin-bottom: 15px;
-}
-
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media (max-width: 850px) {
-
-  .auth {
-    padding: 20px;
-  }
-
-  .auth-card {
-    width: min(520px, 100%);
-
-    min-height: auto;
-
-    padding: 0 40px 40px;
-
-    overflow: hidden;
-  }
-
-  /* Image moves to top */
-  .login-image {
-    position: relative;
-
-    left: 0;
-    top: 0;
-    bottom: auto;
-
-    width: 100%;
-    height: 260px;
-
-    margin: 0 0 35px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-
-    border-radius: 18px;
-
-    background: #f8f7ff;
-  }
-
-  .login-image img {
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-    object-fit: contain;
-    object-position: center;
-  }
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 500px) {
-
-  .auth {
-    min-height: 100vh;
-
-    padding: 12px;
-
-    align-items: flex-start;
-  }
-
-  .auth-card {
-    width: 100%;
-
-    min-height: auto;
-
-    padding: 0 20px 30px;
-
-    border-radius: 22px;
-
-    overflow: hidden;
-  }
-
-  /* =====================================================
-     MOBILE IMAGE
-  ===================================================== */
-
-  .login-image {
-    position: relative;
-
-    left: 0;
-    top: 0;
-    bottom: auto;
-
-    width: 100%;
-    height: 220px;
-
-    margin: 0 0 28px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-
-    border-radius: 16px;
-
-    background: #f8f7ff;
-  }
-
-  .login-image img {
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-    object-fit: contain;
-    object-position: center center;
-  }
-
-
-  /* =====================================================
-     MOBILE TITLE
-  ===================================================== */
-
-  .auth-card > h1 {
-    font-size: 29px;
-
-    margin-bottom: 7px;
-  }
-
-  .auth-card > .muted {
-    font-size: 13px;
-
-    margin-bottom: 27px;
-  }
-
-
-  /* =====================================================
-     MOBILE INPUT
-  ===================================================== */
-
-  .auth-card .field {
-    margin-bottom: 18px;
-  }
-
-  .auth-card .field input {
-    height: 48px;
-  }
-
-
-  /* =====================================================
-     MOBILE BUTTON
-  ===================================================== */
-
-  .auth-card form .btn {
-    height: 48px;
-  }
-
-
-  /* =====================================================
-     MOBILE GOOGLE
-  ===================================================== */
-
-  .auth-card > .google-btn {
-    height: 48px;
-  }
-}
-
-
-/* =========================================================
-   SMALL PHONE
-========================================================= */
-
-@media (max-width: 380px) {
-
-  .auth {
-    padding: 8px;
-  }
-
-  .auth-card {
-    padding: 0 16px 25px;
-
-    border-radius: 20px;
-  }
-
-  .login-image {
-    height: 190px;
-
-    margin-bottom: 24px;
-
-    border-radius: 14px;
-  }
-
-  .login-image img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: contain;
-    object-position: center;
-  }
-
-  .auth-card > h1 {
-    font-size: 27px;
-  }
-}
 /* =========================================================
    OLD GENERIC CLASSES
    Keeps other existing pages working
@@ -2551,9 +2050,6 @@ p {
   border-color: #c7d2fe;
   box-shadow: 0 14px 35px rgba(79, 70, 229, 0.10);
 }
-
-
-
 
 /* =========================================================
    RESPONSIVE — TABLET

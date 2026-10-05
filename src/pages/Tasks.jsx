@@ -18,6 +18,7 @@ export default function Tasks() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
 
+  // Load tasks
   useEffect(() => {
     api("/tasks")
       .then(setTasks)
@@ -30,6 +31,7 @@ export default function Tasks() {
       .finally(() => setLoading(false));
   }, []);
 
+  // Show notification
   const showMessage = (type, text) => {
     setNotice({ type, text });
 
@@ -38,6 +40,7 @@ export default function Tasks() {
     }, 2500);
   };
 
+  // Count tasks by date
   const counts = useMemo(() => {
     return tasks.reduce((result, task) => {
       result[task.date] = (result[task.date] || 0) + 1;
@@ -45,6 +48,7 @@ export default function Tasks() {
     }, {});
   }, [tasks]);
 
+  // Statistics
   const statistics = useMemo(() => {
     const completed = tasks.filter(
       (task) => task.status === "completed"
@@ -71,6 +75,7 @@ export default function Tasks() {
     };
   }, [tasks]);
 
+  // Search + date + status filtering
   const visibleTasks = useMemo(() => {
     let result = showAll
       ? tasks
@@ -101,21 +106,59 @@ export default function Tasks() {
     search,
   ]);
 
-  const saveTask = async (data) => {
+  // =========================================================
+  // CREATE / EDIT TASK
+  // =========================================================
+  const saveTask = async (formData) => {
     try {
-      if (editing?._id) {
-        const updated = await api(
-          `/tasks/${editing._id}`,
-          {
-            method: "PUT",
-            body: data,
-          }
-        );
+      const token = localStorage.getItem("token");
 
+      const apiUrl =
+        import.meta.env.VITE_API_URL || "/api";
+
+      let url;
+      let method;
+
+      // EDIT
+      if (editing?._id) {
+        url = `${apiUrl}/tasks/${editing._id}`;
+        method = "PUT";
+      }
+
+      // CREATE
+      else {
+        url = `${apiUrl}/tasks`;
+        method = "POST";
+      }
+
+      const response = await fetch(url, {
+        method,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+
+        // IMPORTANT:
+        // Do not add Content-Type here.
+        // Browser automatically sets multipart/form-data.
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || "Failed to save task"
+        );
+      }
+
+      // =====================================================
+      // EDIT EXISTING TASK
+      // =====================================================
+      if (editing?._id) {
         setTasks((oldTasks) =>
           oldTasks.map((task) =>
-            task._id === updated._id
-              ? updated
+            task._id === data._id
+              ? data
               : task
           )
         );
@@ -124,18 +167,18 @@ export default function Tasks() {
           "success",
           "Task updated successfully"
         );
-      } else {
-        const created = await api("/tasks", {
-          method: "POST",
-          body: data,
-        });
+      }
 
+      // =====================================================
+      // CREATE NEW TASK
+      // =====================================================
+      else {
         setTasks((oldTasks) => [
           ...oldTasks,
-          created,
+          data,
         ]);
 
-        setSelected(created.date);
+        setSelected(data.date);
         setShowAll(false);
 
         showMessage(
@@ -144,12 +187,24 @@ export default function Tasks() {
         );
       }
 
+      // Close modal
       setEditing(null);
     } catch (error) {
-      showMessage("error", error.message);
+      console.error("Task save error:", error);
+
+      showMessage(
+        "error",
+        error.message || "Failed to save task"
+      );
+
+      // Tell TaskForm that saving failed
+      throw error;
     }
   };
 
+  // =========================================================
+  // UPDATE STATUS
+  // =========================================================
   const updateStatus = async (task, status) => {
     try {
       const updated = await api(
@@ -167,11 +222,22 @@ export default function Tasks() {
             : item
         )
       );
+
+      showMessage(
+        "success",
+        "Task status updated"
+      );
     } catch (error) {
-      showMessage("error", error.message);
+      showMessage(
+        "error",
+        error.message
+      );
     }
   };
 
+  // =========================================================
+  // DELETE TASK
+  // =========================================================
   const deleteTask = async (task) => {
     const confirmDelete = window.confirm(
       `Delete "${task.title}"?`
@@ -195,24 +261,30 @@ export default function Tasks() {
         "Task deleted"
       );
     } catch (error) {
-      showMessage("error", error.message);
+      showMessage(
+        "error",
+        error.message
+      );
     }
   };
 
+  // Current hour
   const hour = new Date().getHours();
 
+  // Greeting
   const greeting =
     hour < 12
       ? "Good morning"
       : hour < 18
-      ? "Good afternoon"
-      : "Good evening";
+        ? "Good afternoon"
+        : "Good evening";
 
   return (
     <div className="creative-task-page">
 
-      {/* TOP NAVIGATION */}
-
+      {/* =====================================================
+          TOP NAVIGATION
+      ====================================================== */}
       <header className="task-navbar">
 
         <div className="task-brand">
@@ -223,7 +295,9 @@ export default function Tasks() {
 
           <div>
             <h1>TaskDesk</h1>
-            <span>Smart task management</span>
+            <span>
+              Smart task management
+            </span>
           </div>
 
         </div>
@@ -240,7 +314,10 @@ export default function Tasks() {
             <strong>
               {user?.username || "User"}
             </strong>
-            <span>My workspace</span>
+
+            <span>
+              My workspace
+            </span>
           </div>
 
           <button
@@ -254,8 +331,9 @@ export default function Tasks() {
 
       </header>
 
-      {/* NOTIFICATION */}
-
+      {/* =====================================================
+          NOTIFICATION
+      ====================================================== */}
       {notice && (
         <div
           className={`task-notification ${notice.type}`}
@@ -272,8 +350,9 @@ export default function Tasks() {
 
       <main className="task-container">
 
-        {/* HERO */}
-
+        {/* ===================================================
+            HERO
+        ==================================================== */}
         <section className="task-hero">
 
           <div className="hero-content">
@@ -314,7 +393,9 @@ export default function Tasks() {
 
             <div className="hero-card-mini">
 
-              <span>Today's progress</span>
+              <span>
+                Today's progress
+              </span>
 
               <strong>
                 {statistics.percentage}%
@@ -338,8 +419,9 @@ export default function Tasks() {
 
         </section>
 
-        {/* STATISTICS */}
-
+        {/* ===================================================
+            STATISTICS
+        ==================================================== */}
         <section className="task-statistics">
 
           <div className="stat-box purple">
@@ -349,7 +431,10 @@ export default function Tasks() {
             </div>
 
             <div>
-              <span>Total Tasks</span>
+              <span>
+                Total Tasks
+              </span>
+
               <strong>
                 {statistics.total}
               </strong>
@@ -364,7 +449,10 @@ export default function Tasks() {
             </div>
 
             <div>
-              <span>Pending</span>
+              <span>
+                Pending
+              </span>
+
               <strong>
                 {statistics.pending}
               </strong>
@@ -379,7 +467,10 @@ export default function Tasks() {
             </div>
 
             <div>
-              <span>In Progress</span>
+              <span>
+                In Progress
+              </span>
+
               <strong>
                 {statistics.progress}
               </strong>
@@ -394,7 +485,10 @@ export default function Tasks() {
             </div>
 
             <div>
-              <span>Completed</span>
+              <span>
+                Completed
+              </span>
+
               <strong>
                 {statistics.completed}
               </strong>
@@ -404,17 +498,20 @@ export default function Tasks() {
 
         </section>
 
-        {/* MAIN CONTENT */}
-
+        {/* ===================================================
+            MAIN CONTENT
+        ==================================================== */}
         <section className="task-workspace">
 
-          {/* CALENDAR */}
-
+          {/* =================================================
+              CALENDAR
+          ================================================== */}
           <aside className="calendar-section">
 
             <div className="section-heading">
 
               <div>
+
                 <span>
                   PLAN AHEAD
                 </span>
@@ -422,6 +519,7 @@ export default function Tasks() {
                 <h3>
                   Calendar
                 </h3>
+
               </div>
 
               <div className="calendar-count">
@@ -447,6 +545,7 @@ export default function Tasks() {
               </div>
 
               <div>
+
                 <strong>
                   Stay organized
                 </strong>
@@ -455,14 +554,16 @@ export default function Tasks() {
                   Select a date to see
                   your scheduled tasks.
                 </p>
+
               </div>
 
             </div>
 
           </aside>
 
-          {/* TASK LIST */}
-
+          {/* =================================================
+              TASK LIST
+          ================================================== */}
           <section className="tasks-section">
 
             <div className="tasks-header">
@@ -496,18 +597,22 @@ export default function Tasks() {
                 {showAll
                   ? "Selected Day"
                   : "View All Tasks"}
-                <span>→</span>
+
+                <span>
+                  →
+                </span>
               </button>
 
             </div>
 
-            {/* SEARCH */}
-
+            {/* SEARCH + FILTER */}
             <div className="task-controls">
 
               <div className="task-search">
 
-                <span>⌕</span>
+                <span>
+                  ⌕
+                </span>
 
                 <input
                   type="text"
@@ -529,6 +634,7 @@ export default function Tasks() {
                 }
                 className="task-filter"
               >
+
                 <option value="all">
                   All Tasks
                 </option>
@@ -544,6 +650,7 @@ export default function Tasks() {
                 <option value="completed">
                   Completed
                 </option>
+
               </select>
 
               <button
@@ -559,8 +666,9 @@ export default function Tasks() {
 
             </div>
 
-            {/* TASKS */}
-
+            {/* =================================================
+                TASKS
+            ================================================== */}
             {loading ? (
 
               <div className="creative-empty">
@@ -630,8 +738,9 @@ export default function Tasks() {
 
       </main>
 
-      {/* MODAL */}
-
+      {/* =====================================================
+          ADD / EDIT TASK MODAL
+      ====================================================== */}
       {editing && (
 
         <div
