@@ -291,42 +291,8 @@ export default function TaskForm({
  
 
       {/* IMAGE PREVIEW */}
-      {preview && (
-        <div
-          style={{
-            marginTop: '10px',
-            position: 'relative',
-          }}
-        >
-          <img
-            src={preview}
-            alt="Task preview"
-            style={{
-              width: '140px',
-              height: '100px',
-              objectFit: 'cover',
-              borderRadius: '10px',
-              border: '1px solid #ddd',
-              display: 'block',
-            }}
-          />
-
-          <button
-            type="button"
-            onClick={removeImage}
-            style={{
-              marginTop: '8px',
-              border: 'none',
-              background: '#f3f3f3',
-              padding: '6px 10px',
-              borderRadius: '6px',
-              cursor: 'pointer',
-            }}
-          >
-            Remove image
-          </button>
-        </div>
-      )}
+      
+     
 
       {/* ACTIONS */}
       <div className="actions">
