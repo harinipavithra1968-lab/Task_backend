@@ -43,7 +43,7 @@ export default function App() {
         // Get logged-in user from backend
         const apiUrl =
           import.meta.env.VITE_API_URL ||
-          "http://localhost:5000/api/auth/google";
+          "https://task-frontend-gyqw.onrender.com/api/auth/google";
 
         const response = await fetch(`${apiUrl}/auth/me`, {
           headers: {
