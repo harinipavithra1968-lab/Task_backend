@@ -1,73 +1,67 @@
-/* =========================================================
-   LOGIN / AUTH PAGE
-   ========================================================= */
+/* =========================================
+   LOGIN PAGE
+   LEFT IMAGE 48% | RIGHT CONTENT 52%
+   ========================================= */
 
 .auth {
   min-height: 100vh;
   width: 100%;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
-  background:
-    radial-gradient(
-      circle at 15% 20%,
-      rgba(88, 101, 242, 0.10),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 85% 80%,
-      rgba(118, 87, 232, 0.08),
-      transparent 30%
-    ),
-    #f5f7fc;
+
+  padding: 30px;
+  box-sizing: border-box;
+
+  background: #f5f7fb;
 }
 
-/* Main login box */
+/* MAIN LOGIN CARD */
+
 .auth-card {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1050px;
   min-height: 620px;
 
-  display: grid;
-  grid-template-columns: 52% 48%;
+  display: flex;
+  flex-direction: row;
 
-  padding: 0;
-  overflow: hidden;
-
-  border: 1px solid #e5e9f3;
-  border-radius: 26px;
   background: #ffffff;
 
-  box-shadow:
-    0 20px 55px rgba(35, 48, 90, 0.13);
+  border-radius: 24px;
+  overflow: hidden;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
 }
 
-/* =========================================================
-   LOGIN IMAGE
-   ========================================================= */
+/* =========================================
+   LEFT - IMAGE 48%
+   ========================================= */
 
 .login-image {
-  width: 100%;
-  height: 100%;
-  min-height: 620px;
+  width: 48%;
+  min-width: 48%;
+  height: 620px;
+
   overflow: hidden;
-  background: #fff8f7;
+
+  flex-shrink: 0;
 }
 
 .login-image img {
   width: 100%;
   height: 100%;
+
   display: block;
 
   object-fit: cover;
   object-position: center;
-
 }
 
-/* =========================================================
-   LOGIN FORM SIDE
-   ========================================================= */
+/* =========================================
+   RIGHT - CONTENT 52%
+   ========================================= */
 
 .auth-card > h1,
 .auth-card > .muted,
@@ -75,177 +69,291 @@
 .auth-card > form,
 .auth-card > .link,
 .auth-card > .google-btn {
-  grid-column: 2;
-}
-
-/* TaskDesk heading */
-.auth-card > h1 {
-  margin: 72px 70px 5px;
-
-  color: var(--primary);
-  font-size: 42px;
-  line-height: 1.1;
-  font-weight: 900;
-  letter-spacing: -1.5px;
-}
-
-/* Subtitle */
-.auth-card > .muted {
-  margin: 0 70px 32px;
-
-  color: #7d879f;
-  font-size: 14px;
-}
-
-/* Error message */
-.auth-card > .notice {
-  margin-left: 70px;
-  margin-right: 70px;
-}
-
-/* Login form */
-.auth-card > form {
   width: auto;
-  margin: 0 70px;
+  box-sizing: border-box;
 }
 
-/* Form fields */
+/* Put all right-side content inside the 52% area */
+
+.auth-card {
+  position: relative;
+}
+
+.auth-card > h1 {
+  margin: 0;
+}
+
+/* =========================================
+   RIGHT SIDE CONTENT POSITIONING
+   ========================================= */
+
+/*
+   Your current JSX does not have a wrapper
+   around the right-side content.
+
+   Therefore use absolute positioning
+   for the right 52%.
+*/
+
+.auth-card > h1,
+.auth-card > .muted,
+.auth-card > .notice,
+.auth-card > form,
+.auth-card > .link,
+.auth-card > .google-btn {
+  position: absolute;
+  left: 48%;
+  width: 52%;
+  box-sizing: border-box;
+}
+
+/* TITLE */
+
+.auth-card > h1 {
+  top: 80px;
+
+  padding: 0 60px;
+
+  font-size: 38px;
+  color: #172033;
+}
+
+/* DESCRIPTION */
+
+.auth-card > .muted {
+  top: 140px;
+
+  padding: 0 60px;
+
+  color: #697386;
+}
+
+/* ERROR */
+
+.auth-card > .notice {
+  top: 185px;
+
+  margin: 0;
+  padding: 0 60px;
+}
+
+/* FORM */
+
+.auth-card > form {
+  top: 200px;
+
+  padding: 0 60px;
+}
+
+/* FIELDS */
+
 .auth-card .field {
-  margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 18px;
 }
 
-/* Labels */
-.auth-card .field > span {
-  color: #26345f;
-  font-size: 13px;
-  font-weight: 800;
+.auth-card .field span {
+  margin-bottom: 7px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  color: #374151;
 }
 
-/* Inputs */
 .auth-card .field input {
   width: 100%;
-  height: 52px;
+  height: 48px;
 
-  padding: 0 15px;
+  padding: 0 14px;
 
-  border: 1px solid #dce2ef;
-  border-radius: 13px;
+  box-sizing: border-box;
 
-  background: #fafbfe;
-  color: var(--dark);
+  border: 1px solid #d9dee8;
+  border-radius: 10px;
 
-  font-size: 14px;
   outline: none;
 
-  transition: 0.2s ease;
+  font-size: 15px;
 }
 
 .auth-card .field input:focus {
-  border-color: var(--primary);
-  background: #ffffff;
+  border-color: #6366f1;
 
   box-shadow:
-    0 0 0 4px rgba(88, 101, 242, 0.09);
+    0 0 0 3px rgba(99, 102, 241, 0.12);
 }
 
-/* Sign in button */
+/* ERROR TEXT */
+
+.auth-card .error-text {
+  margin-top: 5px;
+
+  color: #dc2626;
+
+  font-size: 12px;
+}
+
+/* SIGN IN BUTTON */
+
 .auth-card .btn.primary.block {
   width: 100%;
-  height: 54px;
+  height: 48px;
 
-  margin: 8px 0 0;
+  margin-top: 5px;
 
   border: none;
-  border-radius: 13px;
+  border-radius: 10px;
 
+  background: #6366f1;
   color: #ffffff;
-  background:
-    linear-gradient(
-      135deg,
-      #5865f2,
-      #7657e8
-    );
 
-  font-size: 14px;
-  font-weight: 800;
+  font-size: 15px;
+  font-weight: 700;
 
-  box-shadow:
-    0 10px 24px rgba(88, 101, 242, 0.22);
-
-  transition: 0.2s ease;
+  cursor: pointer;
 }
 
 .auth-card .btn.primary.block:hover {
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 14px 28px rgba(88, 101, 242, 0.28);
+  background: #4f46e5;
 }
 
-/* Create account link */
+/* SWITCH LOGIN / REGISTER */
+
 .auth-card > .link {
-  width: fit-content;
+  top: 490px;
 
-  margin: 25px auto 0;
-
-  padding: 0;
+  padding: 0 60px;
 
   border: none;
   background: transparent;
 
-  color: var(--primary);
-
-  font-size: 13px;
-  font-weight: 500;
-
-  text-decoration: underline;
-}
-
-/* Google button */
-.auth-card > .google-btn {
-  width: auto;
-  height: 50px;
-
-  margin: 38px 70px 0;
-
-  border: 1px solid #d9dfea;
-  border-radius: 13px;
-
-  background: #ffffff;
-  color: #202124;
+  color: #6366f1;
 
   font-size: 14px;
-  font-weight: 700;
+  text-align: center;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+  cursor: pointer;
+}
 
-  transition: 0.2s ease;
+/* GOOGLE BUTTON */
+
+.auth-card > .google-btn {
+  top: 525px;
+
+  height: 48px;
+
+  margin: 0;
+  padding: 0 60px;
+
+  border: 1px solid #d9dee8;
+  border-radius: 10px;
+
+  background: #ffffff;
+  color: #374151;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
 }
 
 .auth-card > .google-btn span {
+  margin-right: 8px;
+
   color: #4285f4;
-  font-size: 18px;
-  font-weight: 900;
+
+  font-weight: 800;
 }
 
-.auth-card > .google-btn:hover {
-  background: #f8f9fc;
-  border-color: #cbd3e2;
-  transform: translateY(-1px);
-}
-.task-image {
-  width: 110px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 10px;
-  display: block;
-  margin-bottom: 10px;
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 650px) {
+
+  .auth {
+    padding: 15px;
+    align-items: flex-start;
+  }
+
+  .auth-card {
+    width: 100%;
+    min-height: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+  }
+
+  /* IMAGE ON TOP */
+
+  .login-image {
+    width: 100%;
+    min-width: 100%;
+
+    height: 240px;
+    min-height: 240px;
+  }
+
+  .login-image img {
+    width: 100%;
+    height: 240px;
+
+    object-fit: cover;
+  }
+
+  /* RESET RIGHT CONTENT */
+
+  .auth-card > h1,
+  .auth-card > .muted,
+  .auth-card > .notice,
+  .auth-card > form,
+  .auth-card > .link,
+  .auth-card > .google-btn {
+    position: static;
+
+    width: 100%;
+
+    box-sizing: border-box;
+  }
+
+  .auth-card > h1 {
+    margin-top: 30px;
+    padding: 0 25px;
+  }
+
+  .auth-card > .muted {
+    margin-top: 10px;
+    padding: 0 25px;
+  }
+
+  .auth-card > .notice {
+    margin-top: 15px;
+    padding: 0 25px;
+  }
+
+  .auth-card > form {
+    margin-top: 20px;
+    padding: 0 25px;
+  }
+
+  .auth-card > .link {
+    margin-top: 15px;
+    padding: 0 25px;
+  }
+
+  .auth-card > .google-btn {
+    margin: 15px 25px 30px;
+    width: calc(100% - 50px);
+    padding: 0;
+  }
 }
 /* =========================================================
-   TASKDESK - MAIN TASK PAGE
+   TASKDESK - COMPLETE TASK PAGE
    ========================================================= */
 
 .creative-task-page {
@@ -265,8 +373,9 @@
    ========================================================= */
 
 .task-navbar {
-  height: 78px;
+  min-height: 78px;
   padding: 0 5%;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -274,6 +383,10 @@
   background: #ffffff;
   border-bottom: 1px solid #e7eaf2;
   box-shadow: 0 5px 20px rgba(35, 48, 90, 0.05);
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .task-brand {
@@ -291,6 +404,7 @@
   justify-content: center;
 
   border-radius: 13px;
+
   color: #ffffff;
   background: linear-gradient(135deg, #5865f2, #7657e8);
 
@@ -329,6 +443,7 @@
   justify-content: center;
 
   border-radius: 50%;
+
   color: #ffffff;
   background: linear-gradient(135deg, #5865f2, #7657e8);
 
@@ -362,6 +477,7 @@
   color: #5f6880;
 
   cursor: pointer;
+
   font-size: 12px;
   font-weight: 700;
 
@@ -391,6 +507,7 @@
   gap: 10px;
 
   border-radius: 12px;
+
   background: #ffffff;
 
   box-shadow: 0 15px 35px rgba(35, 48, 90, 0.15);
@@ -434,16 +551,17 @@
 
   border-radius: 25px;
 
-  background:
-    linear-gradient(
-      135deg,
-      #2938d3,
-      #5865f2 55%,
-      #7657e8
-    );
+  background: linear-gradient(
+    135deg,
+    #2938d3,
+    #5865f2 55%,
+    #7657e8
+  );
 
   color: #ffffff;
-  box-shadow: 0 18px 40px rgba(88, 101, 242, 0.22);
+
+  box-shadow:
+    0 18px 40px rgba(88, 101, 242, 0.22);
 }
 
 .hero-content {
@@ -462,6 +580,8 @@
 .hero-content h2 {
   margin: 12px 0 8px;
 
+  color: #ffffff;
+
   font-size: clamp(28px, 4vw, 42px);
   line-height: 1.1;
   font-weight: 900;
@@ -471,6 +591,7 @@
   margin: 0 0 24px;
 
   color: rgba(255, 255, 255, 0.82);
+
   font-size: 14px;
 }
 
@@ -487,6 +608,7 @@
   font-weight: 800;
 
   cursor: pointer;
+
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 
   transition: 0.2s ease;
@@ -499,7 +621,9 @@
 
 .hero-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.17);
+
+  box-shadow:
+    0 12px 25px rgba(0, 0, 0, 0.17);
 }
 
 /* Hero decoration */
@@ -542,6 +666,7 @@
   border-radius: 17px;
 
   background: rgba(255, 255, 255, 0.13);
+
   backdrop-filter: blur(10px);
 }
 
@@ -560,9 +685,11 @@
 
 .mini-progress {
   height: 6px;
+
   overflow: hidden;
 
   border-radius: 20px;
+
   background: rgba(255, 255, 255, 0.2);
 }
 
@@ -575,6 +702,7 @@
 .hero-card-mini small {
   display: block;
   margin-top: 8px;
+
   font-size: 10px;
   opacity: 0.7;
 }
@@ -603,7 +731,8 @@
 
   background: #ffffff;
 
-  box-shadow: 0 7px 20px rgba(35, 48, 90, 0.05);
+  box-shadow:
+    0 7px 20px rgba(35, 48, 90, 0.05);
 }
 
 .stat-symbol {
@@ -642,7 +771,9 @@
 
 .stat-box span {
   display: block;
+
   color: #8b93a8;
+
   font-size: 11px;
 }
 
@@ -651,6 +782,7 @@
   margin-top: 3px;
 
   color: #26345f;
+
   font-size: 25px;
 }
 
@@ -660,7 +792,7 @@
 
 .task-workspace {
   display: grid;
-  grid-template-columns: 330px 1fr;
+  grid-template-columns: 330px minmax(0, 1fr);
   gap: 22px;
 }
 
@@ -678,7 +810,9 @@
   border-radius: 20px;
 
   background: #ffffff;
-  box-shadow: 0 8px 25px rgba(35, 48, 90, 0.05);
+
+  box-shadow:
+    0 8px 25px rgba(35, 48, 90, 0.05);
 }
 
 .section-heading,
@@ -691,6 +825,7 @@
 .section-heading > div:first-child span,
 .tasks-header > div:first-child > span {
   color: #8b93a8;
+
   font-size: 9px;
   font-weight: 900;
   letter-spacing: 1.5px;
@@ -701,6 +836,7 @@
   margin: 5px 0 0;
 
   color: #26345f;
+
   font-size: 22px;
 }
 
@@ -713,6 +849,7 @@
   justify-content: center;
 
   border-radius: 9px;
+
   background: #eef0ff;
   color: #5865f2;
 
@@ -728,6 +865,7 @@
   gap: 10px;
 
   border-radius: 12px;
+
   background: #f7f8fd;
 }
 
@@ -743,7 +881,9 @@
 
 .calendar-message p {
   margin: 3px 0 0;
+
   color: #8b93a8;
+
   font-size: 10px;
   line-height: 1.5;
 }
@@ -758,7 +898,9 @@
 
 .tasks-header p {
   margin: 5px 0 0;
+
   color: #8b93a8;
+
   font-size: 12px;
 }
 
@@ -772,6 +914,7 @@
   color: #5865f2;
 
   cursor: pointer;
+
   font-size: 11px;
   font-weight: 800;
 }
@@ -837,6 +980,7 @@
   color: #59627a;
 
   outline: none;
+
   cursor: pointer;
 
   font-size: 12px;
@@ -891,6 +1035,7 @@
 
   border: 1px solid #e5e8f0;
   border-left: 4px solid #f0a52b;
+
   border-radius: 13px;
 
   background: #ffffff;
@@ -900,7 +1045,9 @@
 
 .task:hover {
   transform: translateY(-2px);
-  box-shadow: 0 9px 22px rgba(35, 48, 90, 0.08);
+
+  box-shadow:
+    0 9px 22px rgba(35, 48, 90, 0.08);
 }
 
 .task.in-progress {
@@ -921,6 +1068,7 @@
   margin: 0 0 5px;
 
   color: #26345f;
+
   font-size: 14px;
   font-weight: 800;
 
@@ -931,6 +1079,7 @@
   margin: 0 0 5px;
 
   color: #7d879f;
+
   font-size: 12px;
   line-height: 1.5;
 
@@ -950,13 +1099,15 @@
   width: 110px;
   height: 80px;
 
-  object-fit: cover;
   display: block;
-
   flex-shrink: 0;
 
-  border-radius: 10px;
+  object-fit: cover;
+
+  margin-bottom: 10px;
+
   border: 1px solid #e3e6ee;
+  border-radius: 10px;
 
   background: #f4f6fa;
 }
@@ -969,6 +1120,7 @@
   display: flex;
   align-items: center;
   gap: 7px;
+
   flex-shrink: 0;
 }
 
@@ -1023,7 +1175,6 @@
 
 .creative-empty {
   padding: 55px 20px;
-
   text-align: center;
 }
 
@@ -1068,6 +1219,7 @@
 
   border: 3px solid #e5e8f2;
   border-top-color: #5865f2;
+
   border-radius: 50%;
 
   animation: taskSpin 0.8s linear infinite;
@@ -1080,7 +1232,8 @@
 }
 
 /* =========================================================
-   MODAL OVERLAY
+   CREATE / EDIT MODAL
+   IMPORTANT: these names match Tasks.jsx
    ========================================================= */
 
 .creative-overlay {
@@ -1095,6 +1248,7 @@
   justify-content: center;
 
   background: rgba(28, 35, 65, 0.58);
+
   backdrop-filter: blur(5px);
 
   overflow-y: auto;
@@ -1109,10 +1263,14 @@
   overflow-y: auto;
 
   border-radius: 24px;
+
   background: #ffffff;
 
-  box-shadow: 0 25px 70px rgba(15, 22, 45, 0.25);
+  box-shadow:
+    0 25px 70px rgba(15, 22, 45, 0.25);
 }
+
+/* Modal heading */
 
 .modal-top {
   margin-bottom: 25px;
@@ -1124,8 +1282,10 @@
 
 .modal-top span {
   color: #8a93aa;
+
   font-size: 9px;
   font-weight: 900;
+
   letter-spacing: 2px;
 }
 
@@ -1133,7 +1293,9 @@
   margin: 6px 0 0;
 
   color: #26345f;
+
   font-size: 30px;
+  font-weight: 900;
 }
 
 .close-modal {
@@ -1166,9 +1328,11 @@
 
 .creative-modal .field > span {
   display: block;
+
   margin-bottom: 7px;
 
   color: #394366;
+
   font-size: 12px;
   font-weight: 800;
 }
@@ -1179,8 +1343,6 @@
   width: 100%;
 
   box-sizing: border-box;
-
-  padding: 12px 13px;
 
   border: 1px solid #dfe3ed;
   border-radius: 11px;
@@ -1196,12 +1358,16 @@
   transition: 0.2s ease;
 }
 
-.creative-modal .field input {
+.creative-modal .field input,
+.creative-modal .field select {
   height: 45px;
+  padding: 0 13px;
 }
 
 .creative-modal .field textarea {
   min-height: 100px;
+  padding: 12px 13px;
+
   resize: vertical;
 }
 
@@ -1209,9 +1375,11 @@
 .creative-modal .field textarea:focus,
 .creative-modal .field select:focus {
   border-color: #5865f2;
+
   background: #ffffff;
 
-  box-shadow: 0 0 0 4px rgba(88, 101, 242, 0.08);
+  box-shadow:
+    0 0 0 4px rgba(88, 101, 242, 0.08);
 }
 
 .creative-modal .row {
@@ -1225,6 +1393,7 @@
   margin-top: 6px;
 
   color: #9299aa;
+
   font-size: 10px;
 }
 
@@ -1232,30 +1401,143 @@
   color: #e05252 !important;
 }
 
+/* =========================================================
+   IMAGE UPLOAD
+   ========================================================= */
+
 .creative-modal input[type="file"] {
+  width: 100%;
   height: auto;
+
   padding: 10px;
+
+  border: 1px solid #dfe3ed;
+  border-radius: 10px;
+
   background: #ffffff;
 }
 
-/* Image preview inside modal */
+/* Nice upload button */
 
-.creative-modal img {
-  max-width: 180px;
-  max-height: 130px;
-
-  object-fit: cover;
-  border-radius: 11px;
+.image-file-input {
+  display: none !important;
 }
 
-/* Form buttons */
+.task-image-upload {
+  margin-top: 4px;
+  margin-bottom: 18px;
+}
+
+.task-image-upload > span {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #394366;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.image-upload-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 42px;
+
+  padding: 0 18px;
+
+  border: 1px solid #dfe3ed;
+  border-radius: 10px;
+
+  background: #f7f8fc;
+  color: #5865f2;
+
+  cursor: pointer;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  transition: 0.2s ease;
+}
+
+.image-upload-button:hover {
+  background: #eef0ff;
+  border-color: #5865f2;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 5px 14px rgba(88, 101, 242, 0.1);
+}
+
+.task-image-upload small {
+  display: block;
+  margin-top: 7px;
+
+  color: #9299aa;
+
+  font-size: 10px;
+}
+
+/* Image preview */
+
+.task-image-preview {
+  margin-top: 5px;
+  margin-bottom: 18px;
+}
+
+.task-image-preview img {
+  width: 180px;
+  height: 130px;
+
+  display: block;
+
+  object-fit: cover;
+
+  border: 1px solid #dfe3ed;
+  border-radius: 11px;
+
+  background: #f5f6fa;
+}
+
+.remove-image-button {
+  margin-top: 8px;
+
+  padding: 7px 12px;
+
+  border: 1px solid #dfe3ed;
+  border-radius: 7px;
+
+  background: #f3f4f8;
+  color: #60687b;
+
+  cursor: pointer;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.remove-image-button:hover {
+  background: #e9ebf1;
+}
+
+/* =========================================================
+   FORM ACTIONS
+   ========================================================= */
 
 .creative-modal .actions {
   margin-top: 25px;
 
+  padding-top: 18px;
+
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+
+  border-top: 1px solid #edf0f4;
 }
 
 .creative-modal .actions .btn {
@@ -1287,15 +1569,330 @@
 
   color: #ffffff;
 
-  box-shadow: 0 7px 18px rgba(88, 101, 242, 0.2);
+  box-shadow:
+    0 7px 18px rgba(88, 101, 242, 0.2);
 }
+/* =========================================================
+   CALENDAR - FIXED RESPONSIVE VERSION
+   ========================================================= */
+
+.calendar-section {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.calendar {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+
+  background: #ffffff;
+  border: 1px solid #e5e7ef;
+  border-radius: 20px;
+  padding: 20px;
+
+  overflow: hidden;
+}
+
+/* Header */
+.cal-head {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) 40px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.cal-head h2 {
+  margin: 0;
+  min-width: 0;
+
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: #20243a;
+
+  white-space: nowrap;
+}
+
+/* Previous / next buttons */
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+
+  border: none;
+  border-radius: 11px;
+
+  background: #f1efff;
+  color: #6857e8;
+
+  font-size: 28px;
+  line-height: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.icon-btn:hover {
+  background: #6857e8;
+  color: #ffffff;
+}
+
+/* =========================================================
+   CALENDAR GRID
+   ========================================================= */
+
+.cal-grid {
+  width: 100%;
+  min-width: 0;
+
+  display: grid;
+
+  /* IMPORTANT FIX */
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+
+  gap: 9px;
+
+  box-sizing: border-box;
+}
+
+/* Sunday - Saturday */
+.cal-dow {
+  min-width: 0;
+
+  text-align: center;
+
+  font-size: 12px;
+  font-weight: 700;
+  color: #858ba0;
+
+  padding: 6px 0;
+
+  overflow: hidden;
+}
+
+/* Calendar dates */
+.cal-day {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #e9ebf2;
+  border-radius: 12px;
+
+  background: #fafafd;
+  color: #252941;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.cal-day:hover {
+  background: #f1efff;
+  border-color: #cfc8ff;
+  color: #6857e8;
+
+  transform: translateY(-1px);
+}
+
+/* Selected date */
+.cal-day.selected {
+  background: #6857e8;
+  border-color: #6857e8;
+  color: #ffffff;
+
+  box-shadow: 0 6px 15px rgba(104, 87, 232, 0.25);
+}
+
+/* Today */
+.cal-day.today {
+  border: 2px solid #ff7957;
+  color: #ff6b47;
+}
+
+/* Today + selected */
+.cal-day.today.selected {
+  background: #6857e8;
+  border-color: #ff7957;
+  color: #ffffff;
+}
+
+/* =========================================================
+   TASK COUNT BADGE
+   ========================================================= */
+
+.cal-day .badge {
+  position: absolute;
+
+  top: 4px;
+  right: 4px;
+
+  min-width: 18px;
+  height: 18px;
+
+  padding: 0 4px;
+
+  box-sizing: border-box;
+
+  border-radius: 20px;
+
+  background: #ff8565;
+  color: #ffffff;
+
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cal-day.selected .badge {
+  background: #ffffff;
+  color: #6857e8;
+}
+
 
 /* =========================================================
    TABLET
    ========================================================= */
 
-@media (max-width: 1000px) {
+@media (max-width: 900px) {
+  .calendar {
+    padding: 16px;
+  }
 
+  .cal-grid {
+    gap: 7px;
+  }
+
+  .cal-day {
+    min-height: 44px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+
+  .cal-dow {
+    font-size: 11px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .calendar {
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .cal-head {
+    grid-template-columns: 36px minmax(0, 1fr) 36px;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .cal-head h2 {
+    font-size: 17px;
+  }
+
+  .icon-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 23px;
+  }
+
+  .cal-grid {
+    gap: 5px;
+  }
+
+  .cal-day {
+    min-height: 40px;
+    border-radius: 9px;
+    font-size: 13px;
+  }
+
+  .cal-dow {
+    font-size: 10px;
+  }
+
+  .cal-day .badge {
+    top: 2px;
+    right: 2px;
+
+    min-width: 15px;
+    height: 15px;
+
+    font-size: 9px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+  .calendar {
+    padding: 10px;
+  }
+
+  .cal-grid {
+    gap: 4px;
+  }
+
+  .cal-day {
+    min-height: 36px;
+    font-size: 12px;
+    border-radius: 7px;
+  }
+
+  .cal-dow {
+    font-size: 9px;
+  }
+
+  .cal-head h2 {
+    font-size: 15px;
+  }
+
+  .icon-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 21px;
+  }
+}
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
   .task-container {
     width: 94%;
   }
@@ -1319,10 +1916,9 @@
    ========================================================= */
 
 @media (max-width: 750px) {
-
   .task-navbar {
-    height: auto;
     min-height: 70px;
+    height: auto;
     padding: 12px 4%;
   }
 
@@ -1342,7 +1938,6 @@
   .task-hero {
     min-height: auto;
     padding: 30px 25px;
-
     display: block;
   }
 
@@ -1393,10 +1988,7 @@
     flex-basis: 100%;
   }
 
-  .task-filter {
-    flex: 1;
-  }
-
+  .task-filter,
   .add-task-small {
     flex: 1;
   }
@@ -1428,7 +2020,13 @@
     flex: 1;
   }
 
+  .creative-overlay {
+    padding: 10px;
+  }
+
   .creative-modal {
+    width: 100%;
+    max-height: 96vh;
     padding: 22px;
     border-radius: 20px;
   }
@@ -1437,6 +2035,15 @@
     grid-template-columns: 1fr;
     gap: 0;
   }
+
+  .image-upload-button {
+    width: 100%;
+  }
+
+  .task-image-preview img {
+    width: 100%;
+    height: 180px;
+  }
 }
 
 /* =========================================================
@@ -1444,7 +2051,6 @@
    ========================================================= */
 
 @media (max-width: 450px) {
-
   .task-brand span {
     display: none;
   }
@@ -1489,186 +2095,23 @@
   }
 
   .creative-overlay {
-    padding: 10px;
+    padding: 8px;
   }
 
   .creative-modal {
-    width: 100%;
-    max-height: 96vh;
+    max-height: 97vh;
     padding: 18px;
   }
 
   .modal-top h2 {
     font-size: 24px;
   }
-}
-/* =========================================================
-   TABLET
-   ========================================================= */
 
-@media (max-width: 900px) {
-
-  .auth {
-    padding: 20px;
+  .creative-modal .actions {
+    flex-direction: column-reverse;
   }
 
-  .auth-card {
-    max-width: 850px;
-    min-height: 560px;
-
-    grid-template-columns: 48% 52%;
-  }
-
-  .login-image {
-    min-height: 560px;
-  }
-
-  .auth-card > h1 {
-    margin: 55px 45px 5px;
-    font-size: 36px;
-  }
-
-  .auth-card > .muted {
-    margin-left: 45px;
-    margin-right: 45px;
-    margin-bottom: 28px;
-  }
-
-  .auth-card > form {
-    margin-left: 45px;
-    margin-right: 45px;
-  }
-
-  .auth-card > .notice {
-    margin-left: 45px;
-    margin-right: 45px;
-  }
-
-  .auth-card > .google-btn {
-    margin-left: 45px;
-    margin-right: 45px;
-  }
-}
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 700px) {
-
-  .auth {
-    min-height: 100vh;
-    padding: 15px;
-    align-items: flex-start;
-  }
-
-  .auth-card {
+  .creative-modal .actions .btn {
     width: 100%;
-    max-width: 480px;
-    min-height: auto;
-
-    display: flex;
-    flex-direction: column;
-
-    border-radius: 22px;
-  }
-
-  /* Image becomes top section */
-  .login-image {
-    width: 100%;
-    height: 220px;
-    min-height: 220px;
-  }
-
-  .login-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-
-  .auth-card > h1 {
-    margin: 32px 30px 5px;
-
-    font-size: 32px;
-    text-align: center;
-  }
-
-  .auth-card > .muted {
-    margin: 0 30px 25px;
-    text-align: center;
-    font-size: 13px;
-  }
-
-  .auth-card > form {
-    margin: 0 30px;
-  }
-
-  .auth-card > .notice {
-    margin-left: 30px;
-    margin-right: 30px;
-  }
-
-  .auth-card > .link {
-    margin-top: 22px;
-  }
-
-  .auth-card > .google-btn {
-    margin: 28px 30px 30px;
-  }
-}
-
-/* =========================================================
-   SMALL MOBILE
-   ========================================================= */
-
-@media (max-width: 420px) {
-
-  .auth {
-    padding: 10px;
-  }
-
-  .auth-card {
-    border-radius: 18px;
-  }
-
-  .login-image {
-    height: 190px;
-    min-height: 190px;
-  }
-
-  .auth-card > h1 {
-    margin: 27px 22px 5px;
-    font-size: 29px;
-  }
-
-  .auth-card > .muted {
-    margin-left: 22px;
-    margin-right: 22px;
-    margin-bottom: 22px;
-  }
-
-  .auth-card > form {
-    margin-left: 22px;
-    margin-right: 22px;
-  }
-
-  .auth-card > .notice {
-    margin-left: 22px;
-    margin-right: 22px;
-  }
-
-  .auth-card .field input {
-    height: 48px;
-  }
-
-  .auth-card .btn.primary.block {
-    height: 50px;
-  }
-
-  .auth-card > .google-btn {
-    margin-left: 22px;
-    margin-right: 22px;
-    margin-bottom: 24px;
   }
 }

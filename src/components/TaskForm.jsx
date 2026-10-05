@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+
 export const STATUSES = [
   { value: 'pending', label: 'Pending' },
   { value: 'in-progress', label: 'In progress' },
@@ -243,16 +244,20 @@ export default function TaskForm({
         </label>
 
       </div>
-
-      {/* IMAGE */}
-      <label className="field">
+            {/* IMAGE UPLOAD */}
+      <div className="field task-image-upload">
         <span>Task Image</span>
+
+        <label htmlFor="task-image" className="image-upload-button">
+          📷 Choose Image
+        </label>
 
         <input
           id="task-image"
           type="file"
           accept="image/jpeg,image/jpg,image/png,image/webp"
           onChange={handleImageChange}
+          className="image-file-input"
         />
 
         <small>
@@ -264,7 +269,26 @@ export default function TaskForm({
             {errors.image}
           </small>
         )}
-      </label>
+      </div>
+
+      {preview && (
+        <div className="task-image-preview">
+          <img
+            src={preview}
+            alt="Task preview"
+          />
+
+          <button
+            type="button"
+            onClick={removeImage}
+            className="remove-image-button"
+          >
+            Remove image
+          </button>
+        </div>
+      )}
+
+ 
 
       {/* IMAGE PREVIEW */}
       {preview && (
